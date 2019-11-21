@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="InlandMarinaLeasingApplication.Site" %>
+
+  <!--
+	Group Assignment: Michael Karpilovski, Kenton Stefanuk, Soltani Bourega, Thomas Onwude
+    Page Author:Thomas Onwude
+	CPRG 214 – Lab 2
+    Descripton: Boat slip leasing Application for Inland Marina
+    Date: 2019/09/18
+-->
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="load()">
+    <form id="form1" runat="server">
+        <div class="container">
+            <header class="jumbotron">
+                <div>
+                <img src="images/inlandmarina_banner.jpg" class="img-fluid" max-width: 100% ID="inlandmarinalogo" alt="Inland Marina Ltd" /></div>
+
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item" >
+                        <a class="nav-link" data-toggle="pill" id="Home" href="Home.aspx">Home</a>
+                     </li>
+                     <li class="nav-item" >
+                        <a class="nav-link" data-toggle="pill" id="AvailableSlips" href="Available_Slips.aspx">Available Slips</a>
+                     </li>
+                     <% if (Session["UserName"] != null)
+                        { %>
+                        <li class="nav-item" >
+                         <a class="nav-link" data-toggle="pill" id="Lease" href="Lease.aspx">Lease</a>
+                     </li>
+                     <%} %>
+                     <li class="nav-item" >
+                        <a class="nav-link" data-toggle="pill" id="Contact" href="Contact.aspx">Contact Us</a>
+                     </li>
+                    
+                     <% if (Session["UserName"] == null)
+                         { %>
+                            <li class="nav-item" >
+                             <a class="nav-link" data-toggle="pill" id="Registration" href="Registration.aspx">Registration</a>
+                        </li>
+                        <%}%>
+                        
+                        <li class="nav-item">
+                        <%  if (Session["UserName"] == null)
+                            { %>
+
+                        <a ID="Login" class="nav-link" data-toggle="pill" href="Login.aspx" >Log in</a>
+                        <%}
+                            else
+                            {%>
+                            <a ID="Logout" class="nav-link" data-toggle="pill" href="Login.aspx" >Log out</a>
+                            <%} %>
+                    </li>
+                    </ul>
+             </header>
+            <main class="jumbotron">
+            <asp:ContentPlaceHolder ID="mainPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+            </main>
+
+            <footer>
+            <p>&copy; <asp:Label ID="yearLabel" runat="server"></asp:Label>
+                &nbsp;Inland Marina Leasing Services</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
